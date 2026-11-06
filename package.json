@@ -1,0 +1,15 @@
+{
+  "name": "xinyutsai_inm420_js_library",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server --baseDir=\"main\""
+  },
+  "keywords": [],
+  "author": "Sandy",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}

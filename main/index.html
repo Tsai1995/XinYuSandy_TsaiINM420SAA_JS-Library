@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- reset css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@3.0.0/reset.min.css">
+
+    <!-- Leaflet css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <!-- Glide core css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/css/glide.core.min.css">
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">    
+    <!-- external css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Travel Chicken</title>
+
+  
+
+</head>
+<body>
+    <!-- Hero -->
+    <section id="hero">
+        <div class="glide" id="hero-glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides" id="hero-slides">
+                    <!-- slides will be added by main.js -->
+                </ul>
+            </div>
+            <div class="glide__bullets" data-glide-el="controls[nav]" id="hero-bullets">
+                <!-- bullets will be added by main.js -->
+            </div>
+        </div>
+        <!-- Navigation will be added by element.js-->
+        <header id="header"></header>
+
+        <div class="hero-content">
+            <p class="hero-eyebrow">Day tours from Toronto</p>
+            <h1>Ontario's wild side.<br>No car needed.</h1>
+            <p class="hero-lead">Guided hiking, canoeing and snowshoeing trips for solo travellers and small groups.</p>
+        </div>
+    </section>
+
+    <main>
+        <!-- Booking bar -->
+        <section id="booking">
+            <form id="booking-form" class="booking-form" novalidate>
+
+                <div class="field">
+                    <label for="destination">Where</label>
+                    <select id="destination" name="destination">
+                        <option value="any">Any destination</option>
+                        <option value="algonquin">Algonquin Park</option>
+                        <option value="tobermory">Tobermory &amp; Bruce Peninsula</option>
+                        <option value="hamilton">Hamilton Waterfalls</option>
+                        <option value="muskoka">Muskoka</option>
+                        <option value="killarney">Killarney Park</option>
+                        <option value="blue-mountain">Blue Mountain</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="activity">Activity</label>
+                    <select id="activity" name="activity">
+                        <option value="any">Any activity</option>
+                        <option value="hiking">Hiking</option>
+                        <option value="canoeing">Canoeing</option>
+                        <option value="kayaking">Kayaking</option>
+                        <option value="camping">Camping</option>
+                        <option value="snowshoeing">Snowshoeing</option>
+                        <option value="skiing">Skiing</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="tour-date">Date</label>
+                    <input id="tour-date" name="date" type="text" placeholder="Pick a date">
+                </div>
+
+                <div class="field">
+                    <label for="guests">Guests</label>
+                    <div class="stepper">
+                        <button type="button" class="step" data-step="-1" aria-label="Fewer guests">−</button>
+                        <input id="guests" name="guests" type="number" value="1" min="1" max="12">
+                        <button type="button" class="step" data-step="1" aria-label="More guests">+</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="booking-btn">Check availability</button>
+            </form>
+        </section>
+
+        <!-- Top picks + route map -->
+        <section id="picks">
+            <div class="section-head">
+                <p class="eyebrow">Top picks</p>
+                <h2>Most-booked trips this year</h2>
+                <p class="section-lead">Hover a trip to see the route from Toronto and the day's stops.</p>
+            </div>
+
+            <div class="picks-layout">
+                <!-- cards will be added by main.js -->
+                <div id="picks-grid" class="picks-grid"></div>
+
+                <aside class="route-panel" id="route-panel" aria-label="Route and itinerary">
+                    <button type="button" class="sheet-close" id="sheet-close" aria-label="Close route">✕</button>
+                    <div id="route-map" class="route-map"></div>
+                    <div class="route-info">
+                        <p id="route-meta" class="route-meta"></p>
+                        <h3 id="route-title"></h3>
+                        <ol id="route-stops" class="route-stops"></ol>
+                    </div>
+                </aside>
+                <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+            </div>
+        </section>
+
+        <!-- why choose us -->
+        <!-- Services -->
+        <section id="services">
+            <div class="section-head">
+                <p class="eyebrow">What we do</p>
+                <h2>Pick your kind of adventure</h2>
+                <p class="section-lead">Not sure which trip fits you? Tell us what you like and we'll help you choose.</p>
+            </div>
+
+            <!-- cards will be added by main.js -->
+            <div id="services-grid" class="services-grid"></div>
+        </section>
+
+
+
+        <!-- solo travellers -->
+        <section class="why" id="why">
+            <div class="why-inner">
+                <h2 >Why solo travellers book with us</h2>
+                <div class="why-grid">
+                    <article>
+                        <h3>No car, no planning</h3>
+                        <p>Meet us at Dufferin Mall. Transport, park fees and gear rentals are sorted before you arrive.</p>
+                    </article>
+                    <article>
+                        <h3>Come alone, leave with friends</h3>
+                        <p>Most guests join solo. Small vans and shared meals make it easy to talk to people.</p>
+                    </article>
+                    <article>
+                        <h3>Guides who know the trails</h3>
+                        <p>Your guide picks the best trail for the weather and the group, so beginners are welcome.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- reviews -->
+        <section id="reviews">
+            <h2>What our travellers say</h2>
+
+            <div class="glide" id="reviews-glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides" id="reviews-list">
+                        <!-- review cards will be added by main.js -->
+                    </ul>
+                </div>
+
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>
+                </div>
+            </div>
+        </section>
+        <!-- Subscribe + Contact -->
+        <section id="contact">
+            <div class="contact-inner">
+
+                <!-- Left: newsletter -->
+                <div class="subscribe-box">
+                    <p class="eyebrow">Newsletter</p>
+                    <h2>Subscribe &amp; travel</h2>
+                    <p class="contact-lead">New tours, seasonal dates and offers. About one email a month.</p>
+
+                    <form id="subscribe-form" class="subscribe-form" novalidate>
+                        <label for="subscribe-email">Email</label>
+                        <div class="subscribe-row">
+                            <input id="subscribe-email" name="email" type="email" placeholder="you@example.com" required data-parsley-required-message="Enter your email to subscribe."
+                                data-parsley-type-message="That doesn't look like an email. Check for a missing @ or dot."
+                                data-parsley-errors-container="#subscribe-email-error">
+                            <button type="submit" class="form-btn">Subscribe</button>
+                        </div>
+                        <div id="subscribe-email-error"></div>
+
+                        <label class="consent">
+                            <input id="subscribe-consent" name="consent" type="checkbox"
+                                required
+                                data-parsley-required-message="Tick the box so we can email you."
+                                data-parsley-errors-container="#consent-error">
+                            <span>Yes, send me tour news. I can unsubscribe at any time.</span>
+                        </label>
+                        <div id="consent-error"></div>
+                    </form>
+                    <p id="subscribe-success" class="form-success" role="status" hidden></p>
+                </div>
+
+                <!-- Right: contact form -->
+                <div class="contact-box">
+                    <p class="eyebrow">Contact us</p>
+                    <h2>Ask us anything</h2>
+                    <p class="contact-lead">+1 647 625 9033 · info@travellingchicken.ca</p>
+
+                    <form id="contact-form" class="contact-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="contact-name">Name</label>
+                                <input id="contact-name" name="name" type="text" autocomplete="name"
+                                    required
+                                    data-parsley-minlength="2"
+                                    data-parsley-required-message="Tell us your name."
+                                    data-parsley-minlength-message="Name needs at least 2 letters.">
+                            </div>
+                            <div class="form-field">
+                                <label for="contact-email">Email</label>
+                                <input id="contact-email" name="email" type="email" autocomplete="email"
+                                    required
+                                    data-parsley-required-message="We need your email to reply."
+                                    data-parsley-type-message="That doesn't look like an email. Check for a missing @ or dot.">
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contact-service">I'm interested in</label>
+                            <select id="contact-service" name="service">
+                                <option value="general">General question</option>
+                                <option value="hiking">Hiking</option>
+                                <option value="paddling">Canoeing &amp; Kayaking</option>
+                                <option value="waterfalls">Waterfalls</option>
+                                <option value="camping">Camping</option>
+                                <option value="winter">Winter Fun</option>
+                                <option value="shuttle">Shuttle Bus</option>
+                                <option value="private">Private tour</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" name="message" rows="5"
+                                    placeholder="Dates, group size, questions…"
+                                    required
+                                    data-parsley-minlength="10"
+                                    data-parsley-maxlength="500"
+                                    data-parsley-required-message="Write a short message so we know how to help."
+                                    data-parsley-minlength-message="Add a little more detail (at least 10 characters)."
+                                    data-parsley-maxlength-message="Keep it under 500 characters."></textarea>
+                        </div>
+
+                        <button type="submit" class="form-btn">Send message</button>
+                    </form>
+                    <p id="contact-success" class="form-success" role="status" hidden></p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer will be added by element.js-->
+    <footer id="footer"></footer>
+    <!-- js -->
+    <!-- Glide js -->
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/glide.min.js"></script>
+    <!-- flatpickr js -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <!-- leaflet js -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- jQuery + Parsley -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
+    
+    <!-- Mine js -->
+    <script src="js/elements.js"></script>
+    <script src="js/main.js"></script>
+   
+
+</body>
+</html>
